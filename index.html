@@ -508,7 +508,7 @@
                                     <option value="Dogecoin">Dogecoin</option>
                                     <option value="Stellar">Stellar</option>
                                     <option value="Monobank UAH">MonoBank UAH</option>
-                                    <option value="Mastercard">PrivatBank UAH</option>
+                                    <option value="Приват Банк UAH">PrivatBank UAH</option>
                                     <option value="Сбербанк RUB">СберБанк RUB</option>
                                     <option value="Visa">VISA/MasterCard (USD)</option>
                                 </select>
@@ -868,6 +868,19 @@
                 catch{ }
             });
         }
+        function checkMinimum(from, count)
+        {
+            let fromRate = 0;
+            data.forEach(element => {
+                if (element.currency === from) {
+                    fromRate = element.rate;
+                }
+            });
+            if (count / fromRate <= 0.00664)
+                {return false;}
+            else
+                {return true;}
+        }
 
         let rateFrom;
         let rateTo;
@@ -896,6 +909,11 @@
             document.getElementById(va).value = r;
         }
         async function getPost() {
+            if( !checkMinimum(sel('select'), document.getElementById('inputCripto').value) )
+            {
+                alert("Минимальная сумма перевода 40$!");
+                return;
+            }
             await loginAPI();
             let wallet2;
             data.forEach(elem => {
@@ -919,6 +937,7 @@
                 });
             localStorage.setItem('request', request);
             localStorage.setItem('request2', request2);
+
             window.location = 'oplata.html';
 
 
