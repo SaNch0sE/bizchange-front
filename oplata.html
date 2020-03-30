@@ -209,6 +209,7 @@
 	async function getPost() {
 		await loginAPI();
 		var request = localStorage.getItem('request');
+        request.tokens = tokens;
 		fetch(url + '/addTransaction', {
 			method: 'POST',
 			headers: myHeaders,
@@ -217,9 +218,10 @@
 			.then(res => res.json())
 			.then((response) => {
 				console.log(response);
-                if(response.ok)
+                if(response.ok == "true")
                 {
                     alert('Спасибо! Ваша заявка будет обработана в ближайшее время.');
+                    window.location = 'index.html';
                 }
                 else
                 {
@@ -227,7 +229,7 @@
                 }
 			});
 		
-		window.location = 'index.html';
+		
 	}
 </script>
 </body>
