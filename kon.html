@@ -175,17 +175,18 @@
             <p class="formSize">{{text1}}</p>
             <span style="margin-top: 20px">{{box}}</span>
             <label class="formMargin formSize">
-                <input class="formSize formInp ret" required type="email" id="fromEmail">
+                <input class="formSize formInp ret" required type="email" id="fromEmail" form="feedback">
             </label>
             <span>{{messa}}</span>
             <label class="formMargin formSize">
-                <input class="formSize formInp ret" required type="text" id="fromSubject">
+                <input class="formSize formInp ret" required type="text" id="fromSubject" form="feedback">
             </label>
             <label class="formMargin formSize">
                 <span>{{messaT}}</span>
-                <textarea class="formText" required name="text" id="fromText"></textarea>
+                <textarea class="formText" required name="text" id="fromText" form="feedback"></textarea>
             </label>
-            <button class="formButton formSize ret" @click="getPost()">{{sub}}</button>
+            <input class="formButton formSize ret" form="feedback" type="submit">
+            <form  id="feedback" @submit="getPost(); return false;"></form>
         </div>
     </div>
     <div style="background-color: #1F4569; width: 100%; height: 62px; margin-top: 50px ">
@@ -223,7 +224,6 @@
 				messa: 'Тема сообщения:',
 				messaT: 'Текст сообщения:',
 
-				sub: 'Отправить',
 
 				phone: 't.me/BizChange24',
 				email: 'BizChange24@gmail.com',
@@ -269,6 +269,7 @@
 					.then((response) => {
 						this.data = response;
 						tokens = response.tokens;
+                        alert("Спасибо! В случае необходимости мы напишем вам на " + document.getElementById('fromEmail').value);
 					});
 			}
 		},

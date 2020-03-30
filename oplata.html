@@ -217,8 +217,16 @@
 			.then(res => res.json())
 			.then((response) => {
 				console.log(response);
+                if(response.ok)
+                {
+                    alert('Спасибо! Ваша заявка будет обработана в ближайшее время.');
+                }
+                else
+                {
+                    alert("Произошла ошибка! Попробуйте позже.");
+                }
 			});
-		alert('Спасибо! Оплата в скором временни прийдет');
+		
 		window.location = 'index.html';
 	}
 </script>
