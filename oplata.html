@@ -337,7 +337,7 @@
             await loginAPI();
             var request = localStorage.getItem('request');
             request.tokens = tokens;
-            /*fetch(url + '/addTransaction', {
+            fetch(url + '/addTransaction', {
                 method: 'POST',
                 headers: myHeaders,
                 body: request
@@ -352,8 +352,6 @@
                 }).catch(response => {
                     alert("Произошла ошибка! Попробуйте позже.");
                 });
-
-                */
         }
         function copyText(id) {
             /* Get the text field */
