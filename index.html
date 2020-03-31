@@ -6,9 +6,11 @@
     <title>BizChange24</title>
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="shortcut icon" href="./coin/bitcoinICON.ico" type="image/x-icon">
+    <meta http-equiv="Cache-Control" content="no-cache">
 </head>
 
-<body>
+<body onclick>
+
     <style>
         * {
             padding: 0;
@@ -155,6 +157,7 @@
             width: 100%;
             height: 32px;
             border: none;
+            border-radius: 0px;
             border-bottom: 1px solid #1F4569;
             font-size: 22px;
             outline: none;
@@ -431,17 +434,19 @@
         .active:first-of-type+td+td {
             color: gray;
         }
+
         .active:first-of-type+td+td img {
             color: gray;
             opacity: 0.4;
         }
+
         .active:first-of-type+td {
             color: gray;
         }
     </style>
 
     <div id="app">
-        <header>
+        <header ontouchmove>
             <div class="menu">
                 <span class="logo">BizChange24</span>
                 <div class="navMenu">
@@ -463,7 +468,7 @@
                                 <div class="select-arrow-3"></div>
                                 <div class="select-arrow-3"></div>
 
-                                <select id="select"  form="transaction" 
+                                <select id="select" form="transaction"
                                     onchange="input(document.getElementById('inputCripto').value, 'out', 'select', 'myselect')">
                                     <option value="Bitcoin">Bitcoin</option>
                                     <option value="Bitcoin Cash">Bitcoin Cash</option>
@@ -480,8 +485,8 @@
                             </label>
                         </div>
                         <label>
-                            <input type="number" step="0.00001" form="transaction" required placeholder="0.0001" id="inputCripto"
-                                min="0.001" oninput="input(this.value, 'out', 'select', 'myselect')"
+                            <input type="number" step="0.00001" form="transaction" required placeholder="0.0001"
+                                id="inputCripto" min="0.00664" oninput="input(this.value, 'out', 'select', 'myselect')"
                                 onchange="input(this.value, 'out', 'select', 'myselect')">
                         </label>
                     </div>
@@ -493,7 +498,7 @@
                             <div class="select-arrow-3"></div>
 
                             <label>
-                                <select id="myselect" form="transaction" 
+                                <select id="myselect" form="transaction"
                                     onchange="input(document.getElementById('inputCripto').value, 'out', 'select', 'myselect')">
                                     <option value="Bitcoin Cash">Bitcoin Cash</option>
                                     <option value="Bitcoin">Bitcoin</option>
@@ -509,14 +514,14 @@
                                     <option value="Monobank UAH">MonoBank UAH</option>
                                     <option value="Приват Банк UAH">PrivatBank UAH</option>
                                     <option value="Сбербанк RUB">СберБанк RUB</option>
-                                    <option value="Visa">VISA/MasterCard (USD)</option>
+                                    <option value="Visa">VISA/MasterCard USD</option>
                                 </select>
                             </label>
                         </div>
                         <label>
-                            <input type="number" step="0.00001" form="transaction" required placeholder="0.00001" id="out" min="0.001"
-                                oninput="input(this.value, 'inputCripto', 'select', 'myselect')"
-                                onchange="input(this.value, 'inputCripto', 'select', 'myselect')">
+                            <input type="number" step="0.00001" form="transaction" required placeholder="0.00001"
+                                id="out" min="0.001" oninput="input(this.value, 'inputCripto', 'select', 'myselect')"
+                                onkeypress="input(this.value, 'inputCripto', 'select', 'myselect')">
                         </label>
                     </div>
                 </div>
@@ -525,17 +530,22 @@
                     <div class="inputForm">
                         <label>
                             <h6 class="form">Ваш E-mail ящик:</h6>
-                            <input type="email" id="Email" form="transaction" required placeholder="Например: name@gmail.com">
+                            <input type="email" id="Email" form="transaction" required
+                                placeholder="Например: name@gmail.com">
                         </label>
                         <label>
-                            <h6 class="form">Кошелек для получения или номер карты:</h6>
-                            <input type="text" id="monKey" form="transaction" required placeholder="Например: 57hraAvKAqoNSdke84NSIE">
+                            <h6 class="form" id="walletLabel">Кошелек для получения
+                                <!-- или номер карты -->:</h6>
+                            <h6 class="form" id="cardLabel" style="display: none;">Ваш номер карты:</h6>
+                            <input type="text" id="monKey" form="transaction" required minlength="6"
+                                onkeyup="return format(sel('myselect'),'monKey');"
+                                placeholder="Например: 57hraAvKAqoNSdke84NSIE">
                         </label>
                     </div>
                 </div>
                 <button class="submit" type="submit" form="transaction">ОБМЕНЯТЬ</button>
             </main>
-        <form id="transaction" onsubmit="getPost(); return false;"></form>
+            <form id="transaction" onsubmit="getPost(); return false;"></form>
         </div>
         <div>
             <h2 id="CurrencyRateHeader">Курс обмена</h2>
@@ -785,9 +795,6 @@
         </div>
     </div>
 
-
-
-
     <script>
         var data;
         var tokens;
@@ -867,18 +874,30 @@
                 catch{ }
             });
         }
-        function checkMinimum(from, count)
-        {
+        function getMinimum(from) {
+            let rate = 0;
+            let res = 0.00664;
+
+            data.forEach(element => {
+
+                if (element.currency == from) {
+                    //console.log("[" + from + "] and [" + element.currency + "]");
+                    rate = element.rate;
+                    res = Number(0.00664 * rate);
+                }
+            });
+            return res;
+        }
+
+        function checkMinimum(from, count) {
             let fromRate = 0;
             data.forEach(element => {
                 if (element.currency === from) {
                     fromRate = element.rate;
                 }
             });
-            if (count / fromRate <= 0.00664)
-                {return false;}
-            else
-                {return true;}
+            if (count / fromRate <= 0.00664) { return false; }
+            else { return true; }
         }
 
         let rateFrom;
@@ -898,18 +917,67 @@
                     rateTo = elem.rate;
                 }
             });
+            let currency = String(sel(id2));
+            format(sel('myselect'), 'monKey');
+            if (currency.endsWith("UAH") || currency.endsWith("RUB") || currency.endsWith("Visa"))
+            {
+                document.getElementById("cardLabel").style.display = "block";
+                document.getElementById("walletLabel").style.display = "none";
+
+                document.getElementById("monKey").maxlength = 19;
+                document.getElementById("monKey").minlength = 19;
+                document.getElementById("monKey").placeholder = "0000 0000 0000 0000";
+            }
+            else
+            {
+                document.getElementById("monKey").placeholder = "Например: 57hraAvKAqoNSdke84NSIE";
+                document.getElementById("cardLabel").style.display = "none";
+                document.getElementById("walletLabel").style.display = "block";
+
+                document.getElementById("monKey").maxlength = 200;
+                document.getElementById("monKey").minlength = 6; 
+            }
             let r;
             if (va === 'inputCripto') { // (reverse) result + commision
                 r = Number(((num * rateFrom) / (rateTo * (1.0 - commision))).toFixed(5));
             }
-            if (va === 'out') {// result - commision
+            if (va === 'out') { // result - commision
                 r = Number(((num * (1 - commision) * rateTo) / rateFrom).toFixed(5));
             }
+            document.getElementById('inputCripto').min = getMinimum(sel('select'));
             document.getElementById(va).value = r;
         }
-        async function getPost() {
-            if( !checkMinimum(sel('select'), document.getElementById('inputCripto').value) )
+        function format(currency, id) {
+            let value = String(document.getElementById(id).value);
+            if (String(currency).endsWith("UAH") || String(currency).endsWith("RUB") || String(currency).endsWith("Visa"))
             {
+                var v = value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+                var matches = v.match(/\d{4,16}/g);
+                var match = matches && matches[0] || '';
+                var parts = [];
+
+                for (i = 0, len = match.length; i < len; i += 4) {
+                    parts.push(match.substring(i, i + 4))
+                }
+
+                let res = " ";
+                if (parts.length) {
+                    res = parts.join(' ');
+                } else {
+                    res = value;
+                }
+
+                if(res.length > 19 || (/[^0-9 ]+/).test(res))
+                {
+                    res = res.replace(/[^0-9 ]+/g, '');
+                    //return false;
+                }
+                document.getElementById(id).value = res;
+            }
+            return true;
+        }
+        async function getPost() {
+            if (!checkMinimum(sel('select'), document.getElementById('inputCripto').value)) {
                 alert("Минимальная сумма перевода 40$!");
                 return;
             }
@@ -928,17 +996,12 @@
                     howMTo: document.getElementById('out').value,
                     email: document.getElementById('Email').value,
                     wallet: document.getElementById('monKey').value,
+                    wallet2: wallet2,
                     tokens
                 });
-            let request2 = JSON.stringify(
-                {
-                    wallet2: wallet2,
-                });
             localStorage.setItem('request', request);
-            localStorage.setItem('request2', request2);
 
             window.location = 'oplata.html';
-
 
             document.getElementById('inputCripto').value = '';
             document.getElementById('out').value = '';
