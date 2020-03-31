@@ -1,131 +1,154 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="Cache-Control" content="no-cache">
     <title>BizChange24</title>
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-	<link rel="shortcut icon" href="./coin/bitcoinICON.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="./coin/bitcoinICON.ico" type="image/x-icon">
 </head>
-<body>
-<style>
-    *{
-        padding: 0;
-        margin: 0;
-    }
-    header{
-        width: 100%;
-        height: 60px;
-        background-color: #1F4569;
-        overflow: hidden;
-    }
-    .menu{
-        color: #F7F7F7;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-    }
-    .logo{
-        font-family: Roboto, sans-serif;
-        font-style: normal;
-        font-weight: bold;
-        font-size: 28px;
-        line-height: 45px;
-        margin-top: 8px;
-        margin-left: 30px;
-    }
-    .navMenu .nav{
-        font-family: Roboto, sans-serif;
-        font-style: normal;
-        font-weight: normal;
-        font-size: 18px;
-        line-height: 27px;
-        margin: auto 0;
-        color: #F7F7F7;
-        padding-right: 20px;
-        text-decoration: none;
-    }
-    .navMenu{
-        display: flex;
-        flex-direction: row;
-        margin-top: 10px;
-    }
-    @media only screen and (max-width: 600px)
-    {
-        header {
-            flex-wrap: wrap;
-            justify-content: space-between;
-            transition: height 0.3s;
-        }
-        header:focus-within, header:hover {
-            height: 170px;
-        }
-        .navMenu {
-            flex-direction: column;
-            flex-basis: 100%;
-        }
-        .menu {
-            flex-direction: column;
-        }
-        .logo {
-            flex-basis: 100%;
-        }
-        .navMenu .nav {
-            width: 100%;
-            flex-basis: 100%;
-            font-size: 160%;
+
+<body onclick>
+    <style>
+        * {
+            padding: 0;
             margin: 0;
+        }
+
+        header {
+            width: 100%;
+            height: 60px;
+            background-color: #1F4569;
+            overflow: hidden;
+        }
+
+        .menu {
+            color: #F7F7F7;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-family: Roboto, sans-serif;
+            font-style: normal;
+            font-weight: bold;
+            font-size: 28px;
+            line-height: 45px;
+            margin-top: 8px;
+            margin-left: 30px;
+        }
+
+        .navMenu .nav {
+            font-family: Roboto, sans-serif;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 18px;
+            line-height: 27px;
+            margin: auto 0;
+            color: #F7F7F7;
+            padding-right: 20px;
+            text-decoration: none;
+        }
+
+        .navMenu {
+            display: flex;
+            flex-direction: row;
+            margin-top: 10px;
+        }
+
+        @media only screen and (max-width: 600px) {
+            header {
+                flex-wrap: wrap;
+                justify-content: space-between;
+                transition: height 0.3s;
+            }
+
+            header:focus-within,
+            header:hover {
+                height: 170px;
+            }
+
+            .navMenu {
+                flex-direction: column;
+                flex-basis: 100%;
+            }
+
+            .menu {
+                flex-direction: column;
+            }
+
+            .logo {
+                flex-basis: 100%;
+            }
+
+            .navMenu .nav {
+                width: 100%;
+                flex-basis: 100%;
+                font-size: 160%;
+                margin: 0;
+                text-align: center;
+                display: inline-block;
+                padding-right: 0;
+                min-height: 35px;
+            }
+
+            #rez {
+                font-size: 14px;
+            }
+
+            .rezFlex {
+                margin-left: -30px;
+                font-size: 16px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+        }
+
+        h1 {
+            font-family: Roboto, sans-serif;
             text-align: center;
-            display: inline-block;
-            padding-right: 0;
-			min-height: 35px;
+            margin-top: 20px;
         }
-        #rez{
-            font-size: 14px;
+
+        #rez {
+            display: block;
+            margin-top: 30px;
+            margin-left: 50px;
+            font-family: Roboto, sans-serif;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 22px;
         }
-        .rezFlex{
-            margin-left: -30px;
-            font-size: 16px;
+
+        img {
+            width: 40px;
+            margin-right: 20px;
         }
-        h1{
-            font-size: 24px;
+
+        span {
+            margin-left: 15px;
         }
-    }
-    h1{
-        font-family: Roboto, sans-serif;
-        text-align: center;
-        margin-top: 20px;
-    }
-    #rez{
-        display: block;
-        margin-top: 30px;
-        margin-left: 50px;
-        font-family: Roboto, sans-serif;
-        font-style: normal;
-        font-weight: normal;
-        font-size: 22px;
-    }
-    img{
-        width: 40px;
-        margin-right: 20px;
-    }
-    span{
-        margin-left: 15px;
-    }
-    .nameCoin{
-        margin: auto 0;
-    }
-    .rezFlex{
-        display: flex;
-        flex-direction: row;
-        height: 50px;
-        width: 100%;
-    }
-    .basik{
-        flex-basis: 70%;
-    }
-</style>
-    <header>
+
+        .nameCoin {
+            margin: auto 0;
+        }
+
+        .rezFlex {
+            display: flex;
+            flex-direction: row;
+            height: 50px;
+            width: 100%;
+        }
+
+        .basik {
+            flex-basis: 70%;
+        }
+    </style>
+    <header ontouchmove>
         <div class="menu">
             <span class="logo">BizChange24</span>
             <div class="navMenu">
@@ -230,7 +253,7 @@
                 <div>
                     <img src="./coin/zcash.png">
                 </div>
-                <div  class="basik">
+                <div class="basik">
                     <span class="nameCoin">Zcash</span>
                 </div>
                 <div>
@@ -241,7 +264,7 @@
                 <div>
                     <img src="./coin/dogecoin.png">
                 </div>
-                <div  class="basik">
+                <div class="basik">
                     <span class="nameCoin">Dogecoin</span>
                 </div>
                 <div>
@@ -307,58 +330,59 @@
     </div>
     <div style="background-color: #1F4569; width: 100%; height: 62px; margin-top: 50px ">
 
-</div>
+    </div>
 
 
-<script>
-	var data;
-	var tokens;
+    <script>
+        var data;
+        var tokens;
 
-	const url = "https://bizchange24.ru/api";
+        const url = "https://bizchange24.ru/api";
 
-	var myHeaders = new Headers();
-	myHeaders.append("Content-Type", "application/json");
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
 
-	var raw = JSON.stringify({ "login": "api", "password": "T5rEZQ5Q" });
+        var raw = JSON.stringify({ "login": "api", "password": "T5rEZQ5Q" });
 
-	var requestOptions = {
-		method: 'POST',
-		headers: myHeaders,
-		body: raw,
-		redirect: 'follow'
-	};
+        var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow'
+        };
 
-	async function loginAPI() {
-		await fetch(url + "/signin", requestOptions)
-			.then(response => response.json())
-			.then(result => {
-					console.log('API logged in');
-					tokens = result.tokens;
-				}
-			)
-			.catch(error => console.log('error', error));
-	}
+        async function loginAPI() {
+            await fetch(url + "/signin", requestOptions)
+                .then(response => response.json())
+                .then(result => {
+                    console.log('API logged in');
+                    tokens = result.tokens;
+                }
+                )
+                .catch(error => console.log('error', error));
+        }
 
-	async function getAllCurrencies() {
-		await loginAPI();
-		await fetch(url + '/getAllCurrencies',
-			{
-				method: 'POST',
-				headers: myHeaders,
-				redirect: 'follow',
-				body: JSON.stringify({ tokens })
-			}
-		).then(res => res.json())
-			.then((response) => {
-				data = response.data;
-				tokens = response.tokens;
-				data.forEach(element => {
-					if (document.getElementById(element.currencyCode))
-					    document.getElementById(element.currencyCode).innerHTML = element.reserve + document.getElementById(element.currencyCode).innerHTML.substring(3);
-				});
-			});
-	}
-	getAllCurrencies();
-</script>
+        async function getAllCurrencies() {
+            await loginAPI();
+            await fetch(url + '/getAllCurrencies',
+                {
+                    method: 'POST',
+                    headers: myHeaders,
+                    redirect: 'follow',
+                    body: JSON.stringify({ tokens })
+                }
+            ).then(res => res.json())
+                .then((response) => {
+                    data = response.data;
+                    tokens = response.tokens;
+                    data.forEach(element => {
+                        if (document.getElementById(element.currencyCode))
+                            document.getElementById(element.currencyCode).innerHTML = element.reserve + document.getElementById(element.currencyCode).innerHTML.substring(3);
+                    });
+                });
+        }
+        getAllCurrencies();
+    </script>
 </body>
+
 </html>

@@ -10,7 +10,7 @@
 </head>
 
 <body onclick>
-    <header>
+    <header  ontouchmove>
         <div class="menu">
             <span class="logo">BizChange24</span>
             <div class="navMenu">
@@ -80,7 +80,8 @@
     </div>
 
     <div style="text-align: center;">
-        <button type="submit" onclick="window.location='index.html';" style="background-color: #c42323; display: inline-block;">
+        <button type="submit" onclick="window.location='index.html';"
+            style="background-color: #c42323; display: inline-block;">
             Отменить</button>
         <button type="submit" onclick="getPost()" style="background-color: #34a725; display: inline-block;">
             Подтвердить</button>
@@ -134,8 +135,10 @@
             margin: 5px;
             border-radius: 4px;
             box-shadow: 0px 0px 1px rgb(100, 100, 100);
-            background-color: rgb(233, 233, 233);
+            background-color: #145896;
+            color: white;
             transition: 0.3s;
+            font-size: 16px;
             border: none;
         }
 
@@ -159,6 +162,7 @@
             color: slateblue;
             box-shadow: 0px 1px 0.5px rgba(128, 128, 128, 0.911);
         }
+
         #perNa2 {
             height: 40px;
         }
@@ -174,6 +178,7 @@
             font-weight: 500;
             transition: 0.4s;
         }
+
         button:hover {
             box-shadow: gray 0px 1px 4px;
         }
