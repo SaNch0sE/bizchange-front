@@ -876,14 +876,14 @@
         }
         function getMinimum(from) {
             let rate = 0;
-            let res = 0.00664;
+            let res = 0.0091;
 
             data.forEach(element => {
 
                 if (element.currency == from) {
                     //console.log("[" + from + "] and [" + element.currency + "]");
                     rate = element.rate;
-                    res = Number(0.00664 * rate);
+                    res = Number(res * rate);
                 }
             });
             return res;
