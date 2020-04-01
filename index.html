@@ -883,7 +883,7 @@
                 if (element.currency == from) {
                     //console.log("[" + from + "] and [" + element.currency + "]");
                     rate = element.rate;
-                    res = Number(res * rate);
+                    res = Number(0.0091 * rate);
                 }
             });
             return res;
