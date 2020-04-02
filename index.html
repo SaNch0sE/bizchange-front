@@ -838,9 +838,17 @@
                 .then((response) => {
                     data = response.data;
                     tokens = response.tokens;
+                    data.forEach(element => {
+                        if (element.currencyCode === "MIN") {
+                            minimum = element.rate;
+                            viewCurrency("Bitcoin");
+                            input(0.0, 'out', 'select', 'myselect');
+                        }
+                    });
+                    
                 });
-            viewCurrency("Bitcoin");
         }
+        
         // add click actions for currency table
         document.querySelectorAll(".CurrencyButton").forEach(element => {
             let curr = String(element.innerHTML).substring(String(element.innerHTML).indexOf("<span>") + 6, String(element.innerHTML).indexOf("</span>"));
@@ -920,8 +928,7 @@
             });
             let currency = String(sel(id2));
             format(sel('myselect'), 'monKey');
-            if (currency.endsWith("UAH") || currency.endsWith("RUB") || currency.endsWith("Visa"))
-            {
+            if (currency.endsWith("UAH") || currency.endsWith("RUB") || currency.endsWith("Visa")) {
                 document.getElementById("cardLabel").style.display = "block";
                 document.getElementById("walletLabel").style.display = "none";
 
@@ -929,14 +936,13 @@
                 document.getElementById("monKey").minlength = 19;
                 document.getElementById("monKey").placeholder = "0000 0000 0000 0000";
             }
-            else
-            {
+            else {
                 document.getElementById("monKey").placeholder = "Например: 57hraAvKAqoNSdke84NSIE";
                 document.getElementById("cardLabel").style.display = "none";
                 document.getElementById("walletLabel").style.display = "block";
 
                 document.getElementById("monKey").maxlength = 200;
-                document.getElementById("monKey").minlength = 6; 
+                document.getElementById("monKey").minlength = 6;
             }
             let r;
             if (va === 'inputCripto') { // (reverse) result + commision
@@ -950,8 +956,7 @@
         }
         function format(currency, id) {
             let value = String(document.getElementById(id).value);
-            if (String(currency).endsWith("UAH") || String(currency).endsWith("RUB") || String(currency).endsWith("Visa"))
-            {
+            if (String(currency).endsWith("UAH") || String(currency).endsWith("RUB") || String(currency).endsWith("Visa")) {
                 var v = value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
                 var matches = v.match(/\d{4,16}/g);
                 var match = matches && matches[0] || '';
@@ -968,8 +973,7 @@
                     res = value;
                 }
 
-                if(res.length > 19 || (/[^0-9 ]+/).test(res))
-                {
+                if (res.length > 19 || (/[^0-9 ]+/).test(res)) {
                     res = res.replace(/[^0-9 ]+/g, '');
                     //return false;
                 }
@@ -1014,6 +1018,7 @@
             document.getElementById('otzName').value = '';
             document.getElementById('otzText').value = '';
         }
+
     </script>
 </body>
 
